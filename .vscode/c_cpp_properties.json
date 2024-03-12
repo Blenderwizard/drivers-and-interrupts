@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/lib/",
+                "/usr/src/linux-6.7.8-jrathelo/include",
+                "/usr/src/linux-mainline/arch/x86/include/generated",
+                "/usr/src/linux-6.4.12-jrathelo/arch/alpha/include",
+                "/usr/src/linux-6.7.8-jrathelo/arch/x86/include",
+                "/usr/src/linux-6.7.8-jrathelo/include",
+                "/usr/src/linux-6.7.8-jrathelo/include",
+                "/usr/src/linux-6.7.8-jrathelo/include",
+                "/usr/src/linux-6.7.8-jrathelo/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-clang-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}

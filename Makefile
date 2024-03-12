@@ -1,20 +1,23 @@
 KDIR ?= /lib/modules/`uname -r`/build
+SRC = src/main.c src/misc_device_fops.c src/keyboard_logger.c
 
 all: driver_and_interrupts.ko
 
-driver_and_interrupts.ko: src/lib.rs
+driver_and_interrupts.ko: $(SRC)
 	$(MAKE) -C $(KDIR) M=$$PWD LLVM=1
 
-modules_install:
+install: modprobe
+
+modules_install: driver_and_interrupts.ko
 	$(MAKE) -C $(KDIR) M=$$PWD LLVM=1 modules_install
 
 clean:
 	$(MAKE) -C $(KDIR) M=$$PWD LLVM=1 clean
 
-insmod:
-	insmod driver_and_interrupts.ko
+modprobe: modules_install
+	modprobe driver_and_interrupts
 
 rmmod:
 	rmmod driver_and_interrupts
 
-.PHONY: all clean modules_install rmmod insmod
+.PHONY: all clean modules_install rmmod modprobe install
