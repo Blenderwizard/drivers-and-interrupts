@@ -1,0 +1,3 @@
+# /etc/udev/rules.d/99-hello_keyboard.rules
+
+ACTION=="add", SUBSYSTEM=="usb", ATTR{bInterfaceClass}=="03", ATTR{bInterfaceProtocol}=="01", RUN+="/usr/sbin/modprobe driver_and_interrupts"
