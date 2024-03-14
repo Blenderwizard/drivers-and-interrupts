@@ -23,8 +23,15 @@ struct KeyboardCaptureData {
 };
 
 struct linked_list_node {
-    struct KeyboardCaptureData data;
+    struct KeyboardCaptureData key;
+    struct timespec64 when;
+    size_t size;
     struct list_head list;
+};
+
+struct logger {
+    char    shifted;
+    char    capslocked;
 };
 
 
@@ -36,5 +43,6 @@ extern struct mutex lock;
 
 
 void    print_keyboard_line(struct KeyboardCaptureData data);
+size_t  calc_node_size(struct linked_list_node *node);
 
 #endif

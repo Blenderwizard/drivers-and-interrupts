@@ -16,10 +16,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2686ebbf-1c6c-4484-bb57-dec59a208d53" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/keyboard_logger.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/keyboard_logger.c" afterDir="false" />
-    </list>
+    <list default="true" id="2686ebbf-1c6c-4484-bb57-dec59a208d53" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,7 +118,7 @@
     </layout>
   </component>
   <component name="RustProjectSettings">
-    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="toolchainHomeDirectory" value="$PROJECT_DIR$/../.cargo/bin" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -153,7 +150,8 @@
       <workItem from="1710342965253" duration="804000" />
       <workItem from="1710406290228" duration="3416000" />
       <workItem from="1710410667925" duration="2000" />
-      <workItem from="1710410734122" duration="877000" />
+      <workItem from="1710410734122" duration="3818000" />
+      <workItem from="1710428742857" duration="4430000" />
     </task>
     <task id="LOCAL-00001" summary="Removed Rust code, added misc device and irq handle. Began work on correctly formatting print msg and logging files.">
       <option name="closed" value="true" />
