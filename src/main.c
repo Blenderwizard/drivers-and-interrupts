@@ -25,7 +25,10 @@ static struct miscdevice device = {
 
 struct logger {
     char code;
-}key_logger;
+} key_logger;
+
+
+struct mutex lock = __MUTEX_INITIALIZER(lock);
 
 static int __init m_init(void) {
     struct linked_list_node *ptr, *tmp;

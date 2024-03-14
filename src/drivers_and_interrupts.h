@@ -27,12 +27,12 @@ struct linked_list_node {
     struct list_head list;
 };
 
-static struct mutex lock;
 
 #ifndef EXTERN
 # define EXTERN extern
 #endif
 extern struct list_head keyboard_log;
+extern struct mutex lock;
 
 
 void    print_keyboard_line(struct KeyboardCaptureData data);

