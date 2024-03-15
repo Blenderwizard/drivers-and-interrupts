@@ -16,9 +16,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2686ebbf-1c6c-4484-bb57-dec59a208d53" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/99-Hotload-Keyboard.rules" beforeDir="false" afterPath="$PROJECT_DIR$/99-Hotload-Keyboard.rules" afterDir="false" />
-    </list>
+    <list default="true" id="2686ebbf-1c6c-4484-bb57-dec59a208d53" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +100,7 @@
       <window_info anchor="bottom" id="CMake" weight="0.22384511" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="TypeScript" />
-      <window_info anchor="bottom" id="Build" weight="0.32982337" />
+      <window_info anchor="bottom" id="Build" weight="0.26324728" />
       <window_info anchor="bottom" id="Python Packages" />
       <window_info anchor="bottom" id="TODO" />
       <window_info anchor="bottom" id="File Transfer" />
@@ -154,6 +152,7 @@
       <workItem from="1710410667925" duration="2000" />
       <workItem from="1710410734122" duration="3818000" />
       <workItem from="1710428742857" duration="5381000" />
+      <workItem from="1710488169055" duration="12511000" />
     </task>
     <task id="LOCAL-00001" summary="Removed Rust code, added misc device and irq handle. Began work on correctly formatting print msg and logging files.">
       <option name="closed" value="true" />
@@ -168,6 +167,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.rules" />
   </component>
   <component name="VCPKGProject">
     <isAutomaticEditVcpkgJson value="false" />
