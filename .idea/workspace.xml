@@ -16,7 +16,9 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2686ebbf-1c6c-4484-bb57-dec59a208d53" name="Changes" comment="" />
+    <list default="true" id="2686ebbf-1c6c-4484-bb57-dec59a208d53" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -153,6 +155,7 @@
       <workItem from="1710410734122" duration="3818000" />
       <workItem from="1710428742857" duration="5381000" />
       <workItem from="1710488169055" duration="12511000" />
+      <workItem from="1713174090163" duration="3761000" />
     </task>
     <task id="LOCAL-00001" summary="Removed Rust code, added misc device and irq handle. Began work on correctly formatting print msg and logging files.">
       <option name="closed" value="true" />

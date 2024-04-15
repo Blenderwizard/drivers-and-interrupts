@@ -6,12 +6,12 @@ all: driver_and_interrupts.ko
 driver_and_interrupts.ko: $(SRC)
 	$(MAKE) -C $(KDIR) M=$$PWD LLVM=1
 
-install: modprobe rules_install
+install: modprobe rule_install
 
-modules_install: driver_and_interrupts.ko
+module_install: driver_and_interrupts.ko
 	$(MAKE) -C $(KDIR) M=$$PWD LLVM=1 modules_install
 
-rules_install: modules_install 99-Hotload-Keyboard.rules driver_and_interrupts.ko
+rule_install: module_install 99-Hotload-Keyboard.rules driver_and_interrupts.ko
 	cp -v 99-Hotload-Keyboard.rules /etc/udev/rules.d/
 	udevadm control --reload-rules
 	udevadm trigger
@@ -19,7 +19,7 @@ rules_install: modules_install 99-Hotload-Keyboard.rules driver_and_interrupts.k
 clean:
 	$(MAKE) -C $(KDIR) M=$$PWD LLVM=1 clean
 
-modprobe: modules_install
+modprobe: module_install
 	modprobe driver_and_interrupts
 
 rmmod:

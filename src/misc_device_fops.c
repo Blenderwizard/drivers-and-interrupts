@@ -45,6 +45,10 @@ ssize_t read_keyboard_misc_device(struct file *file, char __user *buf, size_t co
         char min = (tmp->when.tv_sec - (sys_tz.tz_minuteswest * 60)) / 60 % 60;
         char hour = (tmp->when.tv_sec - (sys_tz.tz_minuteswest * 60)) / 60 / 60 % 24;
         char *buffer = kmalloc(sizeof(char) * tmp->size, GFP_KERNEL);
+        if (!buffer) {
+            mutex_unlock(&lock);
+            return -ENOMEM;
+        }
         memset(buffer, 0, tmp->size);
         snprintf(buffer, tmp->size, "%02d:%02d:%02d \"%s\"", hour, min, sec, tmp->key.key_name);
         if (tmp->key.ascii_value) {
@@ -58,6 +62,7 @@ ssize_t read_keyboard_misc_device(struct file *file, char __user *buf, size_t co
 
         if (copy_to_user(buf + user_offset, buffer + node_offset, tmp->size - node_offset)) {
             kfree(buffer);
+            mutex_unlock(&lock);
             return -EFAULT;
         }
         kfree(buffer);
