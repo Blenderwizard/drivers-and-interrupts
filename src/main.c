@@ -12,60 +12,62 @@
 #define KEYBOARD_IRQ 1
 
 static const struct file_operations fops = {
-    .owner          = THIS_MODULE,
-    .read           = read_keyboard_misc_device,
+	.owner = THIS_MODULE,
+	.read = read_keyboard_misc_device,
 };
 
 static struct miscdevice device = {
-    .fops           = &fops,
-    .name           = "drivers_and_interrupts",
-    .minor          = MISC_DYNAMIC_MINOR,
-    .mode           = 0444,
+	.fops = &fops,
+	.name = "drivers_and_interrupts",
+	.minor = MISC_DYNAMIC_MINOR,
+	.mode = 0444,
 };
 
 struct mutex lock = __MUTEX_INITIALIZER(lock);
-static struct logger key_logger =  { 0, 0 };
+static struct logger key_logger = { 0, 0 };
 
-static int __init m_init(void) {
-    struct linked_list_node *ptr, *tmp;
-    int err = 0;
+static int __init m_init(void)
+{
+	struct linked_list_node *ptr, *tmp;
+	int err = 0;
 	printk(KERN_INFO "Drivers and Interrupts (init)\n");
 
-    if (request_irq(1, key_logger_isr, IRQF_SHARED, "i8042", &key_logger)) {
-        err = -EBUSY;
-        goto err_free_linked_list;
-    }
-    if (misc_register(&device)) {
-        err = -ENOMEM;
-        goto err_free_keyboard_notifier;
+	if (request_irq(1, key_logger_isr, IRQF_SHARED, "i8042", &key_logger)) {
+		err = -EBUSY;
+		goto err_free_linked_list;
 	}
-    mutex_init(&lock);
+	if (misc_register(&device)) {
+		err = -ENOMEM;
+		goto err_free_keyboard_notifier;
+	}
+	mutex_init(&lock);
 	return 0;
 
 err_free_keyboard_notifier:
-    free_irq(1, &key_logger);
+	free_irq(1, &key_logger);
 err_free_linked_list:
-    list_for_each_entry_safe(ptr, tmp, &keyboard_log, list) {
-        list_del(&ptr->list);
-        kfree(ptr);
-    }
-    return err;
+	list_for_each_entry_safe(ptr, tmp, &keyboard_log, list) {
+		list_del(&ptr->list);
+		kfree(ptr);
+	}
+	return err;
 }
 
-static void __exit m_exit(void) {
-    struct linked_list_node *ptr, *tmp;
+static void __exit m_exit(void)
+{
+	struct linked_list_node *ptr, *tmp;
 
-    misc_deregister(&device);
-    size_t len = 0;
+	misc_deregister(&device);
+	size_t len = 0;
 
-    list_for_each_entry_safe(ptr, tmp, &keyboard_log, list){
-        len++;
-        list_del(&ptr->list);
-        kfree(ptr);
-    }
-    printk(KERN_INFO "Captured %zu Keyboard inputs", len);
-    free_irq(1,&key_logger);
-    mutex_destroy(&lock);
+	list_for_each_entry_safe(ptr, tmp, &keyboard_log, list) {
+		len++;
+		list_del(&ptr->list);
+		kfree(ptr);
+	}
+	printk(KERN_INFO "Captured %zu Keyboard inputs", len);
+	free_irq(1, &key_logger);
+	mutex_destroy(&lock);
 	printk(KERN_INFO "Drivers and Interrupts (exit)\n");
 }
 
