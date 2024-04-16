@@ -4,6 +4,10 @@
 >
 > Use of this project is for **Educational / Testing purposes only**. Using it on **unauthorised machines** is **strictly forbidden**. If somebody is found to use it for **illegal / malicious intent**, author of the repo will **not** be held responsible.
 
+> **Note**
+>
+> This Module has only been tested on Linux Kernel version 6.8.0. It should be compatable with most other versions.
+
 
 Drivers and Interrupts is a 42 Linux Kernel Module Project written in C where you have to code a Linux Kernel keylogger.
 
@@ -24,10 +28,6 @@ make rule_install
 > **Note**
 >
 > Only compatable on systems where udev is installed.
-
-> **Note**
->
-> This Module has only been tested on Linux Kernel version 6.8.0. It should be compatable with most other versions.
 
 > **Note**
 >
